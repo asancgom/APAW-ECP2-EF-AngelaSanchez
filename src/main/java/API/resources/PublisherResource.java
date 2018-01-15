@@ -1,6 +1,8 @@
 package API.resources;
 
+import API.resources.exceptions.AuthorIdNotFoundException;
 import API.resources.exceptions.PublisherFieldInvalidException;
+import API.resources.exceptions.PublisherIdNotFoundException;
 
 import java.util.Optional;
 
@@ -45,4 +47,11 @@ public class PublisherResource {
 		return new PublisherController().deletePublisher(id);
 	}
     
+	public void asociateAuthor(int idPublisher, int idAuthor) throws PublisherIdNotFoundException , AuthorIdNotFoundException{
+		if (new PublisherController().asociateAuthor(idPublisher, idAuthor)== 1) {
+			throw new AuthorIdNotFoundException(Integer.toString(idAuthor));
+		}else if(new PublisherController().asociateAuthor(idPublisher, idAuthor)== 2) {
+			throw new PublisherIdNotFoundException(Integer.toString(idPublisher));
+		}
+	}
 }

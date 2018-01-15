@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import API.daos.DaoFactory;
 import API.dtos.PublisherDTO;
+import API.entities.Author;
 import API.entities.Publisher;
 
 public class PublisherController {
@@ -40,5 +41,21 @@ public class PublisherController {
 			return new PublisherDTO();
 		}
 
+	}
+	
+	public int asociateAuthor(int idPublisher, int idAuthor) {
+		Author author = DaoFactory.getFactory().getAuthorDao().read(idAuthor);
+		if (author != null) {
+			Publisher publisher = DaoFactory.getFactory().getPublisherDao().read(idPublisher);
+			if(publisher != null) {
+				publisher.setAuthor(author);
+				DaoFactory.getFactory().getPublisherDao().update(publisher);
+				return 3;
+			}else {
+				return 2;
+			}
+		} else {
+			return 1;
+		}
 	}
 }

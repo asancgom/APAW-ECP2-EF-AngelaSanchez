@@ -73,7 +73,11 @@ public class Dispatcher implements Server {
 
 	public void doPatch(HttpRequest request, HttpResponse response) {
 		try {
-
+			if (request.isEqualsPath(PublisherResource.PUBLISHER +AuthorResource.AUTHOR + PublisherResource.ID + AuthorResource.ID)) {
+				publisher.asociateAuthor(Integer.valueOf(request.paths()[1]), Integer.valueOf(request.paths()[2]));
+			} else {
+				throw new RequestInvalidException(request.getPath());
+			}
 		} catch (Exception e) {
 			responseError(response, e);
 		}

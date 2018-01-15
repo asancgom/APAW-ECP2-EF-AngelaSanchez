@@ -6,9 +6,15 @@ public class Author {
 	private long id;
 	private String name;
 	private String language;
+
+	public Author() {
+		this.setId(0);
+		this.setName("");
+		this.setLanguage("");
+	}
 	
 	public Author(String name, String language) {
-		Random rnd = new Random();
+		Random rnd= new Random();
 		this.setId(rnd.nextLong());
 		this.setName(name);
 		this.setLanguage(language);

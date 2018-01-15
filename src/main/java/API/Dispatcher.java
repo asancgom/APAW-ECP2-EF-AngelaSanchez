@@ -24,7 +24,13 @@ public class Dispatcher implements Server {
 
 	public void doGet(HttpRequest request, HttpResponse response) {
 		try {
+			if (request.isEqualsPath(PublisherResource.PUBLISHER)) {
 
+				response.setBody(publisher.readPublisher(Integer.valueOf(request.paths()[1])).toString());
+
+			} else {
+				throw new RequestInvalidException(request.getPath());
+			}
 		} catch (Exception e) {
 			responseError(response, e);
 		}

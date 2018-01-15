@@ -1,7 +1,11 @@
 package API.resources;
 
 import API.resources.exceptions.PublisherFieldInvalidException;
-import API.controllers.PublisherController; 
+
+import java.util.Optional;
+
+import API.controllers.PublisherController;
+import API.dtos.PublisherDTO; 
 
 public class PublisherResource {
 	
@@ -24,5 +28,10 @@ public class PublisherResource {
 			throw new PublisherFieldInvalidException("id");
 		}
 	}
+	
+	public PublisherDTO readPublisher(int id) throws PublisherFieldInvalidException {
+    	Optional<PublisherDTO> optional =  new PublisherController().readPublisher(id);
+    	return optional.orElseThrow(()->new PublisherFieldInvalidException(Integer.toString(id)));
+    }
     
 }

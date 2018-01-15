@@ -81,7 +81,12 @@ public class Dispatcher implements Server {
 
 	public void doDelete(HttpRequest request, HttpResponse response) {
 		try {
-
+			if (request.isEqualsPath(PublisherResource.PUBLISHER + PublisherResource.ID)) {
+				String body = publisher.deletePublisher(Integer.valueOf(request.paths()[1])).toString();
+				response.setBody(body);
+			} else {
+				throw new RequestInvalidException(request.getPath());
+			}
 		} catch (Exception e) {
 			responseError(response, e);
 		}

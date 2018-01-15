@@ -30,4 +30,15 @@ public class PublisherController {
 		}
 		return Optional.empty();
 	}
+	
+	public PublisherDTO deletePublisher(int id) {
+		if (existPublisher(id)) {
+			PublisherDTO result = new PublisherDTO(DaoFactory.getFactory().getPublisherDao().read(id));
+			DaoFactory.getFactory().getPublisherDao().deleteById(id);
+			return result;
+		} else {
+			return new PublisherDTO();
+		}
+
+	}
 }

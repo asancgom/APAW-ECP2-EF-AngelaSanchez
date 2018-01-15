@@ -41,6 +41,8 @@ public class PublisherResource {
     }
 	
 	
-	
+	public PublisherDTO deletePublisher(int id) {
+		return new PublisherController().deletePublisher(id);
+	}
     
 }

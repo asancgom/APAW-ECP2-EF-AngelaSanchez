@@ -1,18 +1,15 @@
 package API.entities;
 
+import java.util.Random;
+
 public class Author {
 	private long id;
 	private String name;
 	private String language;
-
-	public Author() {
-		this.setId(0);
-		this.setName("");
-		this.setLanguage("");
-	}
 	
-	public Author(long id, String name, String language) {
-		this.setId(id);
+	public Author(String name, String language) {
+		Random rnd = new Random();
+		this.setId(rnd.nextLong());
 		this.setName(name);
 		this.setLanguage(language);
 	}

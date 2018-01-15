@@ -49,7 +49,13 @@ public class Dispatcher implements Server {
 				String city = request.getBody().split(":")[2];
 				publisher.createPublisher(Integer.valueOf(id), title, city);
 
-			} else {
+			} else if (request.isEqualsPath(AuthorResource.AUTHOR)) {
+
+				String name = request.getBody().split(":")[0];
+				String language = request.getBody().split(":")[1];
+				author.createAuthor(name, language);
+
+			}else {
 				throw new RequestInvalidException(request.getPath());
 			}
 		} catch (Exception e) {

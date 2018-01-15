@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import API.daos.DaoFactory;
 import API.dtos.AuthorDTO;
+import API.entities.Author;
 
 public class AuthorController {
 
@@ -16,6 +17,11 @@ public class AuthorController {
 	
 	private boolean existAuthor(int id) {
 		return DaoFactory.getFactory().getAuthorDao().read(id) != null;
+	}
+	
+	public void createAuthor(String name, String language) {
+		Author entity = new Author(name, language);
+		DaoFactory.getFactory().getAuthorDao().create(entity);
 	}
 }
 

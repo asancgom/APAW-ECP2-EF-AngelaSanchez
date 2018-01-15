@@ -1,10 +1,12 @@
 package API.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import API.daos.DaoFactory;
 import API.dtos.AuthorDTO;
 import API.entities.Author;
+import API.entities.Publisher;
 
 public class AuthorController {
 
@@ -23,6 +25,30 @@ public class AuthorController {
 		Author entity = new Author(name, language);
 		DaoFactory.getFactory().getAuthorDao().create(entity);
 	}
+	public void DeleteAsociatedPublisher(int id) {
+		List<Publisher> publisherList = DaoFactory.getFactory().getPublisherDao().findAll();
+		for (Publisher publisher : publisherList) {
+			Author author = publisher.getAuthor();
+			if(author.getId() == id) {
+				publisher.setAuthor(null);
+				DaoFactory.getFactory().getPublisherDao().update(publisher);
+			}
+		}
+		
+	}
+	public Optional<AuthorDTO> deleteAuthor(int id) {
+		if (existAuthor(id)) {
+			DeleteAsociatedPublisher(id);
+			AuthorDTO result = new AuthorDTO(DaoFactory.getFactory().getAuthorDao().read(id));
+			DaoFactory.getFactory().getAuthorDao().deleteById(id);
+			return Optional.of(result);
+		} else {
+			return Optional.empty();
+		}
+	}
+	
+	
 }
+
 
 

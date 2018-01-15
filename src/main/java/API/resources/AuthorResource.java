@@ -5,6 +5,7 @@ import java.util.Optional;
 import API.controllers.AuthorController;
 import API.dtos.AuthorDTO;
 import API.resources.exceptions.AuthorFieldInvalidException;
+import API.resources.exceptions.AuthorIdNotFoundException;
 
 public class AuthorResource {
 
@@ -28,6 +29,11 @@ public class AuthorResource {
 		if (language == null || language.isEmpty()) {
 			throw new AuthorFieldInvalidException("language");
 		}
+	}
+	
+	public AuthorDTO deleteAuthor(int id) throws AuthorIdNotFoundException {
+		Optional<AuthorDTO> optional =  new AuthorController().deleteAuthor(id);
+    		return optional.orElseThrow(()->new AuthorIdNotFoundException(Integer.toString(id)));
 	}
 
 }

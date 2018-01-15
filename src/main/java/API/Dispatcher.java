@@ -88,6 +88,9 @@ public class Dispatcher implements Server {
 			if (request.isEqualsPath(PublisherResource.PUBLISHER + PublisherResource.ID)) {
 				String body = publisher.deletePublisher(Integer.valueOf(request.paths()[1])).toString();
 				response.setBody(body);
+			} else if (request.isEqualsPath(AuthorResource.AUTHOR + AuthorResource.ID)) {
+				String body = author.deleteAuthor(Integer.valueOf(request.paths()[1])).toString();
+				response.setBody(body);
 			} else {
 				throw new RequestInvalidException(request.getPath());
 			}

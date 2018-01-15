@@ -70,5 +70,21 @@ public class HttpRequest extends HttpBase {
         }
         return query.toString();
     }
+    
+    public boolean isEqualsPath(String pathTemplate) {
+        String[] pathTemplateArray = pathTemplate.split("/");
+        String[] pathArray = this.paths();
+        if (pathArray.length != pathTemplateArray.length) {
+            return false;
+        } else {
+            for (int i = 0; i < pathArray.length; i++) {
+                if (pathTemplateArray[i].indexOf('{') == -1 && !pathTemplateArray[i].equals(pathArray[i])) {
+                    return false;
+                }
+
+            }
+        }
+        return true;
+    }
 
 }

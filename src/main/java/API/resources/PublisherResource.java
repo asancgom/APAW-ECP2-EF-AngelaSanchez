@@ -11,6 +11,7 @@ public class PublisherResource {
 	
 	public static final String PUBLISHER = "publisher";
 	public static final String ID = "/{id}";
+	public static final String ID_CITY = "/{id}/city";
 	
     public void createPublisher(int id, String title, String city) throws PublisherFieldInvalidException {
 		this.validateFileds(id, title,city);
@@ -33,6 +34,12 @@ public class PublisherResource {
     	Optional<PublisherDTO> optional =  new PublisherController().readPublisher(id);
     	return optional.orElseThrow(()->new PublisherFieldInvalidException(Integer.toString(id)));
     }
+	
+	public PublisherDTO readCityPublisher(int id) throws PublisherFieldInvalidException {
+    	Optional<PublisherDTO> optional =  new PublisherController().readCityPublisher(id);
+    	return optional.orElseThrow(()->new PublisherFieldInvalidException(Integer.toString(id)));
+    }
+	
 	
 	
     

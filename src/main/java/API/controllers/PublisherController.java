@@ -23,4 +23,11 @@ public class PublisherController {
 	private boolean existPublisher(int id) {
 		return DaoFactory.getFactory().getPublisherDao().read(id) != null;
 	}
+	
+	public Optional<PublisherDTO> readCityPublisher(int id) {
+		if (existPublisher(id)) {
+			return Optional.of(new PublisherDTO(DaoFactory.getFactory().getPublisherDao().read(id)));
+		}
+		return Optional.empty();
+	}
 }

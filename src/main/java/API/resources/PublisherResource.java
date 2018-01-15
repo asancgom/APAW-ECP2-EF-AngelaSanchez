@@ -33,5 +33,7 @@ public class PublisherResource {
     	Optional<PublisherDTO> optional =  new PublisherController().readPublisher(id);
     	return optional.orElseThrow(()->new PublisherFieldInvalidException(Integer.toString(id)));
     }
+	
+	
     
 }

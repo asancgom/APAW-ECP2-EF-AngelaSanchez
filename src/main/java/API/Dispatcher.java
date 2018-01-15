@@ -1,9 +1,5 @@
 package API;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import API.entities.Publisher;
 import API.resources.AuthorResource;
 import API.resources.PublisherResource;
 import API.resources.exceptions.RequestInvalidException;
@@ -28,7 +24,11 @@ public class Dispatcher implements Server {
 
 				response.setBody(publisher.readPublisher(Integer.valueOf(request.paths()[1])).toString());
 
-			} else {
+			}else if (request.isEqualsPath(AuthorResource.AUTHOR)) {
+
+				response.setBody(author.readAuthor(Integer.valueOf(request.paths()[1])).toString());
+
+			}  else {
 				throw new RequestInvalidException(request.getPath());
 			}
 		} catch (Exception e) {
